@@ -1,0 +1,342 @@
+{% extends "base.html" %}
+  
+{% block content %}
+{% load static %}
+<div class="formbold-main-wrapper">
+  <!-- Author: FormBold Team -->
+  <!-- Learn More: https://formbold.com -->
+  <div class="formbold-form-wrapper">
+    <div class="formbold-event-wrapper">
+      <span>SHARED VISION OF BETTER AND EMPOWERED INDIA</span>
+      <h3>Charitable organization</h3>
+      <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+      <use xlink:href="#image0_1675_1746" transform="translate(0 -0.524787) scale(0.000379363 0.000864594)"/>
+      </pattern>
+      <div class="text-center">
+         <img src="{% static 'img/banner.jpg' %}" style="height:168px">
+      </div>
+        <h4>about our charity.</h4>
+      <p>
+        Since 2008, Bal Raksha Bharat has been working in several states of India to help children get a happy childhood and a bright future.
+      </p>
+    </div>
+<br>
+    <form method="post">
+    {% csrf_token %}
+      <h2 class="formbold-form-title">Donate To Charity.</h2>
+
+      <div class="formbold-input-flex">
+        <div>
+          <label for="firstname" class="formbold-form-label">
+            First name*
+          </label>
+          <input
+          placeholder="first name"
+            type="text"
+            name="firstname"
+            
+            class="formbold-form-input"
+          required>
+        </div>
+        <div>
+          <label for="lastname" class="formbold-form-label"> .</label>
+          <input
+          placeholder="last name"
+            type="text"
+            name="lastname"
+            
+            class="formbold-form-input"
+          required>
+        </div>
+      </div>
+
+      <div>
+        <label for="postcode" class="formbold-form-label"> Address?* </label>
+        <input
+        placeholder="address"
+          type="text"
+          name="address"
+          
+          class="formbold-form-input"
+        required>
+      </div>
+      <br>
+      <div>
+
+      <div class="formbold-input-flex">
+        <div>
+          <label for="email" class="formbold-form-label"> City* </label>
+          <input
+        placeholder="email"
+            type="text"
+            name="city"
+            
+            class="formbold-form-input"
+          required>
+        </div>
+        <div>
+          <label for="phone" class="formbold-form-label"> State* </label>
+          <input
+        placeholder="State"
+
+            type="text"
+            name="state"
+            
+            class="formbold-form-input"
+          required>
+        </div>
+      </div>
+
+      <div class="formbold-input-flex">
+        <div>
+          <label for="jobtitle" class="formbold-form-label"> Post Code* </label>
+          <input
+        placeholder="Post Code"
+            type="text"
+            name="postcode"
+            
+            class="formbold-form-input"
+          required>
+        </div>
+        <div>
+          <label for="company" class="formbold-form-label"> Country* </label>
+          <input
+        placeholder="Country"
+            type="text"
+            name="country"
+           
+            class="formbold-form-input"
+          required>
+        </div>
+      </div>
+
+
+      <div>
+        <label for="postcode" class="formbold-form-label"> Email* </label>
+        <input
+        placeholder="Email"
+          type="text"
+          name="email"
+          
+          class="formbold-form-input"
+        required>
+      </div>
+
+      <div>
+        <label for="postcode" class="formbold-form-label"> Phone Number* </label>
+        <input
+        placeholder="Phone Number"
+          type="text"
+          name="phone"
+          
+          class="formbold-form-input"
+        required>
+      </div>
+<br>
+        <div>
+        <label for="postcode" class="formbold-form-label"> Payment amount* </label>
+        <input
+        placeholder="Payment amount"
+          type="text"
+          name="amount"
+          
+          class="formbold-form-input"
+        requireds>
+      </div>
+
+      <p class="formbold-policy">
+        By filling out this form and clicking submit, you acknowledge our
+        <a href="#">privacy policy.</a>
+      </p>
+      <button type= "submit" class="formbold-btn">Submit</button>
+    </form>
+  </div>
+
+{% if payment %}
+
+<div class='text-center ms-auto' style = 'margin-left: 216px;'>
+<form action="/success" method="post">
+{% csrf_token %}
+<script
+    src="https://checkout.razorpay.com/v1/checkout.js"
+    data-key="rzp_test_VZ6O5qXR38PSUQ" // Enter the Test API Key ID generated from Dashboard → Settings → API Keys
+    data-amount="{{payment.amount}}" // Amount is in currency subunits. Hence, 29935 refers to 29935 paise or ₹299.35.
+    data-currency="INR"// You can accept international payments by changing the currency code. Contact our Support Team to enable International for your account
+    data-order_id="{{payment.id}}"// Replace with the order_id generated by you in the backend.
+    data-buttontext="Pay with Razorpay"
+    data-name="Donations Corp"
+    data-description="A Wild Sheep Chase is the third novel by Japanese author Haruki Murakami"
+    data-image="https://example.com/your_logo.jpg"
+    data-prefill.name="{{firstname}}"
+    data-prefill.email="{{email}}"
+    data-theme.color="#F37254"
+></script>
+<input type="hidden" custom="Hidden Element" name="hidden"/>
+
+</form>
+
+{% endif %}
+</div>
+
+</div>
+
+
+<style>
+
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: 'Inter', sans-serif;
+  }
+  .formbold-main-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px;
+  }
+
+  .formbold-form-wrapper {
+    margin: 0 auto;
+    max-width: 550px;
+    width: 100%;
+    background: white;
+  }
+
+  .formbold-event-wrapper span {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 2.5px;
+    color: #6a64f1;
+    display: inline-block;
+    margin-bottom: 12px;
+  }
+  .formbold-event-wrapper h3 {
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 34px;
+    color: #07074d;
+    width: 60%;
+    margin-bottom: 15px;
+  }
+  .formbold-event-wrapper h4 {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: #07074d;
+    width: 60%;
+    margin: 25px 0 15px;
+  }
+  .formbold-event-wrapper p {
+    font-size: 16px;
+    line-height: 24px;
+    color: #536387;
+  }
+
+  .formbold-event-details {
+    background: #fafafa;
+    border: 1px solid #dde3ec;
+    border-radius: 5px;
+    margin: 25px 0 30px;
+  }
+  .formbold-event-details h5 {
+    color: #07074d;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+    padding: 15px 25px;
+  }
+  .formbold-event-details ul {
+    border-top: 1px solid #edeef2;
+    padding: 25px;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 14px;
+  }
+  .formbold-event-details ul li {
+    color: #536387;
+    font-size: 16px;
+    line-height: 24px;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .formbold-form-title {
+    color: #07074d;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 35px;
+    width: 60%;
+    margin-bottom: 30px;
+  }
+
+  .formbold-input-flex {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 15px;
+  }
+  .formbold-input-flex > div {
+    width: 50%;
+  }
+  .formbold-form-input {
+    {% comment %} text-align: center; {% endcomment %}
+    width: 100%;
+    padding: 13px 22px;
+    border-radius: 5px;
+    border: 1px solid #dde3ec;
+    background: #ffffff;
+    font-weight: 500;
+    font-size: 16px;
+    color: #536387;
+    outline: none;
+    resize: none;
+  }
+  .formbold-form-input:focus {
+    border-color: #6a64f1;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
+  }
+  .formbold-form-label {
+    color: #536387;
+    font-size: 14px;
+    line-height: 24px;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .formbold-policy {
+    font-size: 14px;
+    line-height: 24px;
+    color: #536387;
+    width: 70%;
+    margin-top: 22px;
+  }
+  .formbold-policy a {
+    color: #6a64f1;
+  }
+  .formbold-btn {
+    text-align: center;
+    width: 100%;
+    font-size: 16px;
+    border-radius: 5px;
+    padding: 14px 25px;
+    border: none;
+    font-weight: 500;
+    background-color: #6a64f1;
+    color: white;
+    cursor: pointer;
+    margin-top: 25px;
+  }
+  .formbold-btn:hover {
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
+  }
+</style>
+
+{% endblock content %}
